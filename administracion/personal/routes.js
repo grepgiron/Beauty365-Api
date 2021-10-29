@@ -1,6 +1,6 @@
 var  express = require("express");
 
-var PersonalController = require('./controlador/personal.controller');
+var PersonalController = require('./controllers/personal.controller');
 
 
 const router = express.Router();

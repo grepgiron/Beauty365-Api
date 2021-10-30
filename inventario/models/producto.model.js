@@ -8,13 +8,11 @@ const productoSchema = new mongoose.Schema({
     },
     nombre: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
     descripcion: {
         type: String,
-        required: false,
-        trim: true
+        required: false
     },
     unidad: {
         type: mongoose.Schema.Types.ObjectId,
@@ -36,4 +34,4 @@ const productoSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('producto', categoriaSchema)
+module.exports = mongoose.model('producto', productoSchema)

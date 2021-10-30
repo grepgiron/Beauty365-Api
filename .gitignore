@@ -103,5 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-administracion/personal/node_modules/
+administracion/node_modules/
+config/node_modules/
+citas/node_modules/
+inventario/node_modules/
 

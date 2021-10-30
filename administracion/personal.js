@@ -26,9 +26,9 @@ async function connectMongoose(){
     }).catch(err => {
         console.info(err)
     })
-  require("./cliente.model");
+  require("./models/cliente.model");
   Cliente = mongoose.model('cliente');
-  require("./empleado.model");
+  require("./models/empleado.model");
   Cliente = mongoose.model('empleado');
 }
 

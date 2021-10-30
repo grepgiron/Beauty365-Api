@@ -2,9 +2,9 @@
 
 //Cargar Modelos de inventario
 
-var Categoria = require('../cateogria.model');
-var Producto = require('../producto.model');
-var Unidades = require('../unidades.model');
+var Categoria = require('../../config/models/categoria.model');
+var Producto = require('../models/producto.model');
+var Unidades = require('../../config/models/unidades.model');
 
 //Crear Categoria
 const createCategoria = async (req, res) => {

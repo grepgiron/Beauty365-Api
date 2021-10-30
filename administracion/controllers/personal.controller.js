@@ -1,7 +1,7 @@
 'use strict'
 
-var Cliente = require('../cliente.model');
-var Empleado = require('../empleado.model');
+var Cliente = require('../models/cliente.model');
+var Empleado = require('../models/empleado.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 

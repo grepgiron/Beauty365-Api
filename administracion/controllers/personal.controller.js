@@ -17,14 +17,14 @@ const createCliente = async (req, res) => {
     dni: req.body.dni,
     email: req.body.email
   })
-  const result = await newTutor.save();
+  const result = await newCliente.save();
   res.json(result)
 }
 
 const getCliente = async (req, res ) => {
   Cliente.findById(req.params._id)
   .then(cliente => {
-      if(!clinete) {
+      if(!cliente) {
           return res.status(404).send({
               message: "User not found with id " + req.params._id
           });            

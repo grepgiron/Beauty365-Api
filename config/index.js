@@ -9,21 +9,18 @@ var Routes = require('./routes');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use('/api', Routes);
+app.use('/api/config', Routes);
 
 // Cargar Mongo
 const mongoose = require('mongoose');
-
 
 // Objeto de cliente global que será la instancia del documento MongoDB
 async function connectMongoose(){
   await mongoose.connect('mongodb+srv://beauty:KsgHecmhzDu76K7k@beautydb.bu8hu.mongodb.net/BeautyDB?retryWrites=true&w=majority').then(result => {
         console.info('MongoDb Connection Complete.' );
-        
     }).catch(err => {
         console.info(err)
     })
-
 }
 
 // Definiendo carga inicial del servicio
@@ -34,7 +31,7 @@ async function initialLoad() {
 initialLoad()
 
 //Puerto de conexion
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Listening: http://localhost:${port}`);
   console.log("Up and running order service");

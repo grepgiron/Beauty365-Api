@@ -9,7 +9,7 @@ var Routes = require('./routes');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use('/api', Routes);
+app.use('/api/administracion', Routes);
 
 // Cargar Mongo
 const mongoose = require('mongoose');

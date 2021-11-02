@@ -6,12 +6,12 @@ var PersonalController = require('./controllers/personal.controller');
 const router = express.Router();
 
 router
-  .get('/personal/clientes', PersonalController.getClientes)
-  .post('/personal/clientes', PersonalController.createCliente);
+  .get('/clientes', PersonalController.getClientes)
+  .post('/clientes', PersonalController.createCliente);
 
 router
-  .get('/personal/empleados', PersonalController.getEmpleados)
-  .post('/personal/empleados', PersonalController.createEmpleado);
+  .get('/empleados', PersonalController.getEmpleados)
+  .post('/empleados/create', PersonalController.createEmpleado);
 
 
 module.exports = router;

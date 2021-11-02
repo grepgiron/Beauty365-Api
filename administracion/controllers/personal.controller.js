@@ -52,7 +52,7 @@ const createEmpleado = async (req, res) => {
   const newEmpleado = new Empleado({
     nombres: req.body.nombres,
     telefono: req.body.telefono,
-    dni: req.body.habilidades
+    habilidades: req.body.habilidades
   })
   const result = await newEmpleado.save();
   res.json(result)

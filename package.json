@@ -4,6 +4,7 @@
   "description": "Api Salon de Belleza Beauty365",
   "main": "app.js",
   "scripts": {
+    "start": "cd administracion && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

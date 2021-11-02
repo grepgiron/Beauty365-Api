@@ -37,5 +37,5 @@ initialLoad()
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Listening: http://localhost:${port}`);
-  console.log("Up and running order service");
+  console.log("Up and running Beauty365Salon service");
 });

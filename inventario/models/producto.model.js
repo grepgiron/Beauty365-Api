@@ -19,6 +19,10 @@ const productoSchema = new mongoose.Schema({
         ref: 'unidades',
         required: true
     },
+    costo: {
+        type: Number,
+        required: false
+    },
     precio: {
         type: Number,
         required: false

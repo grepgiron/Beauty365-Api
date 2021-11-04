@@ -5,7 +5,7 @@ const unidadesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    name: { 
+    nombre: { 
         type: String, 
         required: true 
     }

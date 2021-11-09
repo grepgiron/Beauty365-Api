@@ -2,9 +2,9 @@
   "name": "beauty365",
   "version": "1.0.0",
   "description": "Api Salon de Belleza Beauty365",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "cd administracion && npm start",
+    "start": "cd config && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -4,22 +4,27 @@ const ClienteSchema = new mongoose.Schema({
     nombres: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        match: [/([A-z])\w+/, "Nombre inválido"]
+        
     },
     telefono: {
         type: Number,
         required: false,
-        trim: true
+        trim: true,
+        match: [/^([\d]{8})?$/, "Teléfono inválido"]
     },
     dni: {
         type: Number,
-        trim: true
+        trim: true,
+        unique: true,
+        match: [/^([\d]{13,14})?$/, "DNI inválido"]
     },
     email: {
         type: String,
         trim: true,
         unique: true,
-        match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,3})?$/, "correo invalido"]
+        match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,3})?$/, "Correo inválido"]
     }
 
 }, {

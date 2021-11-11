@@ -4,12 +4,15 @@ const UserSchema = new mongoose.Schema({
     nombres: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        match: [/([A-z])\w+/, "Nombre inválido"]
+        
     },
     telefono: {
-        type: String,
+        type: Number,
         required: true,
-        trim: true
+        trim: true,
+        match: [/^([\d]{8})?$/, "Teléfonoo inválido"]
     },
     habilidades: {
         type: String,

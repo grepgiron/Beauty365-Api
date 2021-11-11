@@ -6,7 +6,6 @@ const ClienteSchema = new mongoose.Schema({
         required: true,
         trim: true,
         match: [/([A-z])\w+/, "Nombre inválido"]
-        
     },
     telefono: {
         type: Number,

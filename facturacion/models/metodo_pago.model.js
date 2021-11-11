@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const MetodoPagoSchema = new mongoose.Schema({
-  code: {
-    type: String,
-    required: true
-  },
   nombre: {
     type: String,
     required: true

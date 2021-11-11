@@ -4,14 +4,13 @@ var MetodoPagado = require('../models/metodo_pago.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
-const getMedotosDePago = async (req, res) => {
+const getMetodosDePago = async (req, res) => {
   const metodosDePago =  await MetodoPagado.find()
     res.json(metodosDePago)
 }
 
 const createMetodoDePago = async (req, res) => {
   const newMetodo = new MetodoPagado({
-    code: req.body.code,
     nombre: req.body.nombre,
     descripcion: req.body.descripcion
   })
@@ -41,7 +40,7 @@ const getMetodoDePago = async (req, res ) => {
 }
 
 module.exports = {
-    getMedotosDePago,
+    getMetodosDePago,
     getMetodoDePago,
     createMetodoDePago
 }

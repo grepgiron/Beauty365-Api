@@ -17,7 +17,9 @@ const ClienteSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        trim: true
+        trim: true,
+        unique: true,
+        match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,3})?$/, "correo invalido"]
     }
 
 }, {

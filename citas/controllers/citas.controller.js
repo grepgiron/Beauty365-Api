@@ -15,9 +15,11 @@ const createCita = async (req, res) => {
     telefono: req.body.telefono,
     dni : req.body.dni,
     fecha : req.body.fecha,
-    hora : req.body.hora
+    hora : req.body.hora,
+    comentario : req.body.comentario,
   })
   const result = await newCita.save();
+  
   res.json(result)
 }
 

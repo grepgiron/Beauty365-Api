@@ -44,5 +44,5 @@ const getCliente = async (req, res ) => {
 module.exports = {
     getCliente,
     getClientes,
-    createEmpleado
+    createCliente
 }

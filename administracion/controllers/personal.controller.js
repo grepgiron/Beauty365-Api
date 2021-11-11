@@ -17,8 +17,10 @@ const createCliente = async (req, res) => {
     dni: req.body.dni,
     email: req.body.email
   })
-  const result = await newCliente.save();
-  res.json(result)
+  newCliente.save(function(err, result) {
+    if (err) return res.json(err);
+    res.json(result)
+  });
 }
 
 const getCliente = async (req, res ) => {

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ClienteSchema = new mongoose.Schema({
     nombres: {
         type: String,
-        required: true,
+        required: [true, 'El nombre es necesario'],
         trim: true
     },
     telefono: {

@@ -11,8 +11,8 @@ const getEstablecimientos = async (req, res) => {
 
 const createEstablecimiento = async (req, res) => {
   const newEstablecimiento = new Establecimiento({
-    code: req.body.nombre,
-    nombre: req.body.prefijo
+    nombre: req.body.nombre,
+    prefijo: req.body.prefijo
   })
   const result = await newEstablecimiento.save();
   res.json(result)

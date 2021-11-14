@@ -11,8 +11,8 @@ const getPuntosDeVenta = async (req, res) => {
 
 const createPuntoDeVenta = async (req, res) => {
   const newPuntoDeVenta = new PuntoDeVenta({
-    code: req.body.nombre,
-    nombre: req.body.prefijo
+    nombre: req.body.nombre,
+    prefijo: req.body.prefijo
   })
   const result = await newPuntoDeVenta.save();
   res.json(result)

@@ -11,8 +11,8 @@ const getDocumentosFiscal = async (req, res) => {
 
 const createDocumentoFiscal = async (req, res) => {
   const newDocumentoFiscal = new DocumentoFiscal({
-    code: req.body.nombre,
-    nombre: req.body.prefijo
+    nombre: req.body.nombre,
+    prefijo: req.body.prefijo
   })
   const result = await newDocumentoFiscal.save();
   res.json(result)

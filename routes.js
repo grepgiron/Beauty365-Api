@@ -14,6 +14,8 @@ var POS = require('./config/controllers/punto_de_venta.controller');
 var Factura = require('./facturacion/controllers/factura.controller');
 var MetodoPago = require('./facturacion/controllers/metodo_pago.controller');
 
+var Sar = require('./config/controllers/sar.controller');
+
 
 const router = express.Router();
 

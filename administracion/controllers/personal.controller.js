@@ -18,7 +18,7 @@ const createCliente = async (req, res) => {
     email: req.body.email
   })
   newCliente.save(function(err, result) {
-    if (err) return res.json(err);
+    if (err) return res.json(err.message);
     res.json(result)
   });
 }

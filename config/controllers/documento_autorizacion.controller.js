@@ -26,9 +26,9 @@ const createDocumentoAutorizado = async (req, res) => {
 
 const getDocumentoAutorizado = async (req, res ) => {
   DocumentoAutorizado.findById(req.params._id)
-  .populate({ path: 'establecimiento', select: 'nombre' })
+  .populate({ path: 'establecimiento', select: 'nombre prefijo' })
   .populate({ path: 'pos', select: 'nombre' })
-  .populate({ path: 'documento_fiscal', select: 'nombre' })
+  .populate({ path: 'documento_fiscal', select: 'nombre prefijo' })
   .then(documentoAutorizado => {
       if(!documentoAutorizado) {
           return res.status(404).send({

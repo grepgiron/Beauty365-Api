@@ -21,6 +21,7 @@ const router = express.Router();
 
 router
   .get('/clientes', PersonalController.getClientes)
+  .get('/clientes', PersonalController.getCliente)
   .post('/clientes', PersonalController.createCliente);
 
 router

@@ -22,16 +22,20 @@ const router = express.Router();
 router
   .get('/clientes', PersonalController.getClientes)
   .get('/clientes/:_id', PersonalController.getCliente)
+  .put('/clientes/:_id', PersonalController.updateCliente)
   .post('/clientes', PersonalController.createCliente);
 
 router
   .get('/empleados', PersonalController.getEmpleados)
+  .get('/empleados/:_id', PersonalController.getEmpleados)
+  .put('/empleados/:_id', PersonalController.updateEmpleado)
   .post('/empleados/create', PersonalController.createEmpleado);
 
   router
-  .get('/categorias', Categoria.getCategorias)
-  .get('/categorias/:_id', Categoria.getCategoria)
-  .post('/categorias/create', Categoria.createCategoria);
+  .get('/categorias', Categoria.index)
+  .get('/categorias/:_id', Categoria.get)
+  .put('/categorias/:_id', Categoria.update)
+  .post('/categorias/create', Categoria.create);
 
 router
   .get('/unidades', Unidades.getUndidades)
@@ -44,24 +48,25 @@ router
   .post('/productos/create', Producto.createProducto);
 
   router
-  .get('/documentos_autorizados', DocumentoAutorizado.getDocumentosAutorizado)
-  .get('/documentos_autorizados/:_id', DocumentoAutorizado.getDocumentoAutorizado)
-  .post('/documentos_autorizados/create', DocumentoAutorizado.createDocumentoAutorizado);
+  .get('/documentos_autorizados', DocumentoAutorizado.index)
+  .get('/documentos_autorizados/:_id', DocumentoAutorizado.get)
+  .put('/documentos_autorizados/:_id', DocumentoAutorizado.update)
+  .post('/documentos_autorizados/create', DocumentoAutorizado.create);
 
 router
-  .get('/documentos_fiscal', DocumentoFiscal.getDocumentosFiscal)
-  .get('/documentos_fiscal/:_id', DocumentoFiscal.getDocumentoFiscal)
-  .post('/documentos_fiscal/create', DocumentoFiscal.createDocumentoFiscal);
+  .get('/documentos_fiscal', DocumentoFiscal.index)
+  .get('/documentos_fiscal/:_id', DocumentoFiscal.get)
+  .post('/documentos_fiscal/create', DocumentoFiscal.create);
 
 router
-  .get('/establecimientos', Establecimiento.getEstablecimientos)
-  .get('/establecimientos/:_id', Establecimiento.getEstablecimiento)
-  .post('/establecimientos/create', Establecimiento.createEstablecimiento);
+  .get('/establecimientos', Establecimiento.index)
+  .get('/establecimientos/:_id', Establecimiento.get)
+  .post('/establecimientos/create', Establecimiento.create);
 
 router
-  .get('/puntos_de_venta', POS.getPuntosDeVenta)
-  .get('/puntos_de_venta/:_id', POS.getPuntoDeVenta)
-  .post('/puntos_de_venta/create', POS.createPuntoDeVenta);
+  .get('/puntos_de_venta', POS.index)
+  .get('/puntos_de_venta/:_id', POS.get)
+  .post('/puntos_de_venta/create', POS.create);
 
 router
   .get('/facturas', Factura.getFacturas)

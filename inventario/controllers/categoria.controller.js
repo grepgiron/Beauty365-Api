@@ -4,12 +4,12 @@ var Categoria = require('../models/categoria.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
-const getCategorias = async (req, res) => {
+const index = async (req, res) => {
   const categorias =  await Categoria.find()
     res.json(categorias)
 }
 
-const createCategoria = async (req, res) => {
+const create = async (req, res) => {
   const newCategoria = new Categoria({
     code: req.body.code,
     nombre: req.body.nombre,
@@ -19,7 +19,28 @@ const createCategoria = async (req, res) => {
   res.json(result)
 }
 
-const getCategoria = async (req, res ) => {
+const update = async (req, res) => {
+    if(req.params.body){
+      return res.status(404).send({
+        message: "User not found with id " + req.params.body
+      });
+    }
+    const categoria = await Categoria.findByIdAndUpdate(req.params._id, 
+      { 
+        code: req.body.code,
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion
+      }, {
+      new: true
+    });
+  
+    if (!categoria) {
+      return res.status(404).send('That platform ID was not found');
+    }
+    res.send(categoria);
+  }
+
+const get = async (req, res ) => {
     Categoria.findById(req.params._id)
   .then(categoria => {
       if(!categoria) {
@@ -41,7 +62,8 @@ const getCategoria = async (req, res ) => {
 }
 
 module.exports = {
-    getCategoria,
-    getCategorias,
-    createCategoria
+    get,
+    update,
+    index,
+    create
 }

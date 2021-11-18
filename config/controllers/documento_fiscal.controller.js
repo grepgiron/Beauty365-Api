@@ -4,12 +4,12 @@ var DocumentoFiscal = require('../models/documento_fiscal.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
-const getDocumentosFiscal = async (req, res) => {
+const index = async (req, res) => {
   const documentoFiscal =  await DocumentoFiscal.find()
     res.json(documentoFiscal)
 }
 
-const createDocumentoFiscal = async (req, res) => {
+const create = async (req, res) => {
   const newDocumentoFiscal = new DocumentoFiscal({
     nombre: req.body.nombre,
     prefijo: req.body.prefijo
@@ -18,7 +18,7 @@ const createDocumentoFiscal = async (req, res) => {
   res.json(result)
 }
 
-const getDocumentoFiscal = async (req, res ) => {
+const get = async (req, res ) => {
   DocumentoFiscal.findById(req.params._id)
   .then(documentoFiscal => {
       if(!documentoFiscal) {
@@ -40,7 +40,7 @@ const getDocumentoFiscal = async (req, res ) => {
 }
 
 module.exports = {
-  getDocumentoFiscal,
-  getDocumentosFiscal,
-  createDocumentoFiscal
+  get,
+  create,
+  index
 }

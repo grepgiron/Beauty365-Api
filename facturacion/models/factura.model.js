@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const FacturaSchema = new mongoose.Schema({
   num_factura: {
-    type: String,
-    required: true
+    type: String
   },
   fecha: {
     type: String,
@@ -56,8 +55,7 @@ const FacturaSchema = new mongoose.Schema({
   },
   metodo_pago: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'metodo_pago',
-    required: true
+    ref: 'metodo_pago'
   },
   estado: {
     type: String,

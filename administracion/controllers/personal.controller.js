@@ -23,6 +23,28 @@ const createCliente = async (req, res) => {
   });
 }
 
+const updateCliente = async (req, res) => {
+  if(req.params.body){
+    return res.status(404).send({
+      message: "User not found with id " + req.params.body
+    });
+  }
+  const cliente = await Cliente.findByIdAndUpdate(req.params._id, 
+    { 
+      nombres: req.body.nombres,
+      telefono: req.body.telefono,
+      dni: req.body.dni,
+      email: req.body.email
+    }, {
+    new: true
+  });
+
+  if (!cliente) {
+    return res.status(404).send('That platform ID was not found');
+  }
+  res.send(cliente);
+}
+
 const getCliente = async (req, res ) => {
   Cliente.findById(req.params._id)
   .then(cliente => {
@@ -56,9 +78,33 @@ const createEmpleado = async (req, res) => {
     telefono: req.body.telefono,
     habilidades: req.body.habilidades
   })
-  const result = await newEmpleado.save();
-  res.json(result)
+  newEmpleado.save(function(err, result) {
+    if (err) return res.json(err.message);
+    res.json(result)
+  });
 }
+
+const updateEmpleado = async (req, res) => {
+  if(req.params.body){
+    return res.status(404).send({
+      message: "User not found with id " + req.params.body
+    });
+  }
+  const empleado = await Empleado.findByIdAndUpdate(req.params._id, 
+    { 
+      nombres: req.body.nombres,
+      telefono: req.body.telefono,
+      habilidades: req.body.habilidades
+    }, {
+    new: true
+  });
+
+  if (!empleado) {
+    return res.status(404).send('That platform ID was not found');
+  }
+  res.send(empleado);
+}
+
 
 const getEmpleado = async (req, res ) => {
   Empleado.findById(req.params._id)
@@ -84,9 +130,11 @@ const getEmpleado = async (req, res ) => {
 
 module.exports = {
   getCliente,
+  updateCliente,
   createCliente,
   getClientes,
   getEmpleado,
+  updateEmpleado,
   createEmpleado,
   getEmpleados
 }

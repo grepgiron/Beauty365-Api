@@ -4,12 +4,12 @@ var Establecimiento = require('../models/establecimiento.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
-const getEstablecimientos = async (req, res) => {
+const index = async (req, res) => {
   const establecimiento =  await Establecimiento.find()
     res.json(establecimiento)
 }
 
-const createEstablecimiento = async (req, res) => {
+const create = async (req, res) => {
   const newEstablecimiento = new Establecimiento({
     nombre: req.body.nombre,
     prefijo: req.body.prefijo
@@ -18,7 +18,7 @@ const createEstablecimiento = async (req, res) => {
   res.json(result)
 }
 
-const getEstablecimiento = async (req, res ) => {
+const get = async (req, res ) => {
   Establecimiento.findById(req.params._id)
   .then(establecimiento => {
       if(!establecimiento) {
@@ -40,7 +40,7 @@ const getEstablecimiento = async (req, res ) => {
 }
 
 module.exports = {
-  getEstablecimiento,
-  getEstablecimientos,
-  createEstablecimiento
+  get,
+  create,
+  index
 }

@@ -11,7 +11,7 @@ const getFacturas = async (req, res) => {
 
 const createFactura = async (req, res) => {
   const newFactura = new Factura({
-    num_factura: req.body.num_factura,
+    //num_factura: req.body.num_factura,
     fecha: req.body.fecha,
     doc_autorizacion: req.body.doc_autorizacion,
     cliente: req.body.cliente,
@@ -19,11 +19,20 @@ const createFactura = async (req, res) => {
     sub_total: req.body.sub_total,
     impuesto: req.body.impuesto,
     total: req.body.sub_total,
-    metodo_pago: req.body.impuesto,
+    metodo_pago: req.body.metodo_pago,
     estado: req.body.impuesto
   })
-  const result = await newFactura.save();
-  res.json(result)
+  newFactura.save(function(err, result) {
+    if (err) return res.json(err.message);
+    Factura.findByIdAndUpdate(result._id, { $inc: { num_factura: 1 } }, { new: true },
+        function(err, response) {
+        if (err) {
+        res.json(err);
+       } else {
+        res.json(result);
+       }
+    });
+  });
 }
 
 const getFactura = async (req, res ) => {

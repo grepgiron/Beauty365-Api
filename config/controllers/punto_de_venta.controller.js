@@ -4,12 +4,12 @@ var PuntoDeVenta = require('../models/pos.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
-const getPuntosDeVenta = async (req, res) => {
+const index = async (req, res) => {
   const puntosDeVenta =  await PuntoDeVenta.find()
     res.json(puntosDeVenta)
 }
 
-const createPuntoDeVenta = async (req, res) => {
+const create = async (req, res) => {
   const newPuntoDeVenta = new PuntoDeVenta({
     nombre: req.body.nombre,
     prefijo: req.body.prefijo
@@ -18,7 +18,7 @@ const createPuntoDeVenta = async (req, res) => {
   res.json(result)
 }
 
-const getPuntoDeVenta = async (req, res ) => {
+const get = async (req, res ) => {
   PuntoDeVenta.findById(req.params._id)
   .then(puntoDeVenta => {
       if(!puntoDeVenta) {
@@ -40,7 +40,7 @@ const getPuntoDeVenta = async (req, res ) => {
 }
 
 module.exports = {
-    getPuntoDeVenta,
-    getPuntosDeVenta,
-    createPuntoDeVenta
+    get,
+    create,
+    index
 }

@@ -5,9 +5,15 @@ const MetodoPagoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  descripcion: {
-    type: String,
-    trim: true
+  dias_pago: {
+    type: String
+  },
+  credito: {
+    type: Boolean
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 }, {
     versionKey: false,

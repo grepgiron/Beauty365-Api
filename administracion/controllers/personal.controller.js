@@ -128,22 +128,22 @@ const getEmpleado = async (req, res ) => {
 }
 
 const deleteEmpleado = async (req, res) => {
-  Empleado.findByIdAndRemove(req.params.noteId)
+  Empleado.findByIdAndRemove(req.params._id)
   .then(note => {
     if(!note) {
       return res.status(404).send({
-        message: "Note not found with id " + req.params.noteId
+        message: "Note not found with id " + req.params._id
       });
     }
     res.send({message: "Note deleted successfully!"});
   }).catch(err => {
     if(err.kind === 'ObjectId' || err.name === 'NotFound') {
       return res.status(404).send({
-        message: "Note not found with id " + req.params.noteId
+        message: "Employee not found with id " + req.params._id
       });                
     }
     return res.status(500).send({
-      message: "Could not delete note with id " + req.params.noteId
+      message: "Could not delete employee with id " + req.params._id
     });
   });
 }

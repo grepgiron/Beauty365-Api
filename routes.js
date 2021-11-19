@@ -27,7 +27,7 @@ router
 
 router
   .get('/empleados', PersonalController.getEmpleados)
-  .get('/empleados/:_id', PersonalController.getEmpleados)
+  .get('/empleados/:_id', PersonalController.getEmpleado)
   .put('/empleados/:_id', PersonalController.updateEmpleado)
   .post('/empleados/create', PersonalController.createEmpleado);
 

@@ -29,6 +29,7 @@ router
   .get('/empleados', PersonalController.getEmpleados)
   .get('/empleados/:_id', PersonalController.getEmpleado)
   .put('/empleados/:_id', PersonalController.updateEmpleado)
+  .delete('/empleados/:_id', PersonalController.deleteEmpleado)
   .post('/empleados/create', PersonalController.createEmpleado);
 
   router

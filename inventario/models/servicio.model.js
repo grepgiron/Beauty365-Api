@@ -14,6 +14,10 @@ const servicioSchema = new mongoose.Schema({
       type: String,
       required: false
     },
+    detalle: {
+      type: String,
+      required: false
+    },
     precio: {
       type: Number,
       required: false

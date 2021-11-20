@@ -15,6 +15,7 @@ var Factura = require('./facturacion/controllers/factura.controller');
 var MetodoPago = require('./facturacion/controllers/metodo_pago.controller');
 
 var Sar = require('./config/controllers/sar.controller');
+var Service = require('./inventario/controllers/servicio.controller');
 
 
 const router = express.Router();
@@ -42,6 +43,12 @@ router
   .get('/unidades', Unidades.getUndidades)
   .get('/unidades/:_id', Unidades.getUnidad)
   .post('/unidades/create', Unidades.createUnidades);
+
+router
+  .get('/servicios', Service.index)
+  .get('/servicios/:_id', Service.get)
+  .post('/servicios/create', Service.create)
+  .put('/servicios/:_id', Service.update);
 
 router
   .get('/productos', Producto.getProductos)

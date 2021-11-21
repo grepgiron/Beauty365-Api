@@ -58,7 +58,7 @@ router
   router
   .get('/documentos_autorizados', DocumentoAutorizado.index)
   .get('/documentos_autorizados/:_id', DocumentoAutorizado.get)
-  .get('/documentos_autorizados/:id/simple', DocumentoAutorizado.getSimple)
+  .get('/documentos_autorizados/simple/:id', DocumentoAutorizado.getSimple)
   .put('/documentos_autorizados/:_id', DocumentoAutorizado.update)
   .post('/documentos_autorizados/create', DocumentoAutorizado.create);
 

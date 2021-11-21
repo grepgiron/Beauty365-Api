@@ -74,10 +74,32 @@ const get = async (req, res ) => {
   });
 }
 
+const getSimple = async (req, res ) => {
+  DocumentoAutorizado.findById(req.params._id)
+  .then(documentoAutorizado => {
+      if(!documentoAutorizado) {
+          return res.status(404).send({
+              message: "documentoAutorizado not found with id " + req.params._id
+          });            
+      }
+      res.send(documentoAutorizado);
+  }).catch(err => {
+      if(err.kind === 'ObjectId') {
+          return res.status(404).send({
+              message: "documentoAutorizado not found with id " + req.params._id
+          });                
+      }
+      return res.status(500).send({
+          message: "Error retrieving documentoAutorizado with id " + req.params._id
+      });
+  });
+}
+
 module.exports = {
   get,
   index,
   update,
-  create
+  create,
+  getSimple
   
 }

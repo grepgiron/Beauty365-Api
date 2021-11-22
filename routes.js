@@ -53,6 +53,7 @@ router
 router
   .get('/productos', Producto.getProductos)
   .get('/productos/:_id', Producto.getProducto)
+  .put('/productos/:_id', Producto.update)
   .post('/productos/create', Producto.createProducto);
 
   router

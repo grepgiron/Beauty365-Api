@@ -50,6 +50,31 @@ const getProducto = async (req, res ) => {
   });
 }
 
+const update = async (req, res) => {
+  if(req.params.body){
+    return res.status(404).send({
+      message: "product not found with id " + req.params.body
+    });
+  }
+  const producto = await Producto.findByIdAndUpdate(req.params._id, 
+    { 
+      code: req.body.code,
+      nombre: req.body.nombre,
+      descripcion : req.body.descripcion,
+      unidad : req.body.unidad,
+      costo : req.body.costo,
+      precio : req.body.precio,
+      categoria : req.body.categoria
+    }, {
+    new: true
+  });
+
+  if (!producto) {
+    return res.status(404).send('That platform ID was not found');
+  }
+  res.send(producto);
+}
+
 function createStock(req) {
   const newStock = new Stock({
     producto: req
@@ -61,5 +86,6 @@ function createStock(req) {
 module.exports = {
     getProducto,
     getProductos,
-    createProducto
+    createProducto,
+    update
 }

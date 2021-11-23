@@ -31,14 +31,6 @@ const FacturaSchema = new mongoose.Schema({
     precio: {
       type: Number,
       required: true
-    },
-    descuento: {
-      type: Number,
-      required: true
-    },
-    total: {
-      type: Number,
-      required: true
     }
   }],
   sub_total: {

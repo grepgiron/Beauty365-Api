@@ -28,6 +28,10 @@ const FacturaSchema = new mongoose.Schema({
       type: Number,
       required: true
     },
+    nombre: {
+      type: String,
+      required: true
+    },
     precio: {
       type: Number,
       required: true

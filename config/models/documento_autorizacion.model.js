@@ -33,12 +33,29 @@ const SarSchema = new mongoose.Schema({
       trim: true
     },
     is_active: {
-      type: Boolean
+      type: Boolean,
+      default: true
     }
 
 }, {
     versionKey: false,
     timestamps: true
 });
+
+SarSchema.pre('save', function (next) {
+    mongoose.model('sar').find().sort({$natural:-1}).limit(1).exec(function(err, sar){
+        if(err) return next(err);
+        if(sar.length > 0){
+        mongoose.model('sar').findByIdAndUpdate(sar[0]._id, 
+            {$set: {is_active: false}}, {new: true}, function(err, sar){
+                if(err){
+                    console.log(err);
+                }
+            });
+        }
+    });
+    next();
+});
+                
 
 module.exports = mongoose.model('sar', SarSchema)

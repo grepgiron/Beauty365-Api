@@ -1,11 +1,12 @@
 'use strict'
 
 var DocumentoAutorizado = require('../models/documento_autorizacion.model');
+var Rango = require('../models/rango.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
 const index = async (req, res) => {
-  const documentoAutorizado =  await DocumentoAutorizado.find()
+  const documentoAutorizado =  await DocumentoAutorizado.find().sort({ fecha_limite: -1 })
     res.json(documentoAutorizado)
 }
 
@@ -20,8 +21,39 @@ const create = async (req, res) => {
     rango_final: req.body.rango_final,
     is_active: req.body.is_active
   })
-  const result = await newDocumentoAutorizado.save();
-  res.json(result)
+  newDocumentoAutorizado.save(function(err, result) {
+    if (err){ 
+      return res.json(err.message)
+    }else{
+      Rango.find().sort({ fecha_limite: -1 }).limit(1).then(rango => {
+        if(rango.length > 0){
+          if(rango[0].rango_final >= newDocumentoAutorizado.rango_final){
+            return res.json('El rango final del documento autorizado no puede ser mayor al rango final del rango ' + rango[0].rango_final)
+          }else{
+            Rango.findByIdAndUpdate(rango[0]._id,
+              { $set: {
+                documento_autorizado: newDocumentoAutorizado._id, 
+                final: newDocumentoAutorizado.rango_final,
+                inicio: newDocumentoAutorizado.rango_inicial,
+                actual: 0
+               }},
+               { new: true }, function (err, rango) {
+              if (err) return res.json(err.message)
+              return res.json(result)
+            })
+          }
+        }else{
+          const rango = new Rango({
+            documento_autorizado: result._id,
+            inicio: result.rango_inicial,
+            final: result.rango_final
+          })
+          rango.save();
+          return res.json(result)
+        }
+      })
+    }
+  });
 }
 
 const update = async (req, res) => {

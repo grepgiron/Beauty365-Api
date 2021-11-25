@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const FacturaSchema = new mongoose.Schema({
   num_factura: {
-    type: String
+    type: Number,
   },
   fecha: {
     type: String,

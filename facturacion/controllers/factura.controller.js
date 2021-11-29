@@ -22,7 +22,7 @@ const createFactura = async (req, res) => {
       productos: req.body.productos,
       sub_total: req.body.sub_total,
       impuesto: req.body.impuesto,
-      total: req.body.sub_total,
+      total: req.body.total,
       metodo_pago: req.body.metodo_pago,
       estado: req.body.impuesto
     });

@@ -12,6 +12,9 @@ const getMetodosDePago = async (req, res) => {
 const createMetodoDePago = async (req, res) => {
   const newMetodo = new MetodoPagado({
     nombre: req.body.nombre,
+    dias_pago: req.body.dias_pago,
+    credito: req.body.credito,
+    active: req.body.active,
     descripcion: req.body.descripcion
   })
   const result = await newMetodo.save();

@@ -10,6 +10,7 @@ var DocumentoAutorizado = require('./config/controllers/documento_autorizacion.c
 var DocumentoFiscal = require('./config/controllers/documento_fiscal.controller');
 var Establecimiento = require('./config/controllers/establecimiento.controller');
 var POS = require('./config/controllers/punto_de_venta.controller');
+var Rango = require('./config/controllers/rango.controller');
 
 var Factura = require('./facturacion/controllers/factura.controller');
 var MetodoPago = require('./facturacion/controllers/metodo_pago.controller');
@@ -62,6 +63,10 @@ router
   .get('/documentos_autorizados/simple/:_id', DocumentoAutorizado.getSimple)
   .put('/documentos_autorizados/:_id', DocumentoAutorizado.update)
   .post('/documentos_autorizados/create', DocumentoAutorizado.create);
+
+router
+  .get('/rango/:_id', Rango.get)
+  .put('/rango/:_id', Rango.update)
 
 router
   .get('/documentos_fiscal', DocumentoFiscal.index)

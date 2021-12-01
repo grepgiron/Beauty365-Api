@@ -4,6 +4,11 @@ var Rango = require('../models/rango.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
+const index = async (req, res) => {
+    const establecimiento =  await Rango.find().sort({$natural: -1}).limit(1);
+      res.json(establecimiento)
+}
+
 const get = async (req, res ) => {
   Rango.findById(req.params._id)
   .then(rango => {
@@ -48,5 +53,6 @@ const update = async (req, res ) => {
 
 module.exports = {
   get,
-  update
+  update,
+  index
 }

@@ -66,6 +66,7 @@ router
 
 router
   .get('/rango/:_id', Rango.get)
+  .get('/rango', Rango.index)
   .put('/rango/:_id', Rango.update)
 
 router

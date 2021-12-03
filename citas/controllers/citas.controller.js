@@ -1,6 +1,7 @@
 'use strict'
 
 var Cita = require('../models/cita.model');
+var DetalleCita = require('../models/detalle_cita.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
@@ -19,9 +20,17 @@ const createCita = async (req, res) => {
     hora : req.body.hora,
     comentario : req.body.comentario,
   })
-  const result = await newCita.save();
-  
-  res.json(result)
+  const result = await newCita.save().then(result => {
+      const { _id } = result;
+      const detalle = new DetalleCita({
+        cita_id: _id
+      })
+        detalle.save();
+        res.json({
+            message: 'Cita creada correctamente',
+            result
+        })
+    })
 }
 
 const updateCita = async (req, res) => {

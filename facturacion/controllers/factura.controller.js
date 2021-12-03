@@ -67,6 +67,35 @@ const createFactura = async (req, res) => {
 
 const getFactura = async (req, res ) => {
   Factura.findById(req.params._id)
+    .populate('cliente')
+    .populate(
+      { 
+        path: 'doc_autorizacion', 
+        populate: 
+        { 
+          path: 'establecimiento',
+        },
+         
+      })
+      .populate(
+        { 
+          path: 'doc_autorizacion', 
+          populate: 
+          { 
+            path: 'pos',
+          },
+           
+        })
+        .populate(
+          { 
+            path: 'doc_autorizacion', 
+            populate: 
+            { 
+              path: 'documento_fiscal',
+            },
+             
+          })
+          .populate('metodo_pago')
   .then(factura => {
       if(!factura) {
           return res.status(404).send({

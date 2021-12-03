@@ -67,7 +67,6 @@ const createFactura = async (req, res) => {
 
 const getFactura = async (req, res ) => {
   Factura.findById(req.params._id)
-    .populate('cliente')
     .populate(
       { 
         path: 'doc_autorizacion', 

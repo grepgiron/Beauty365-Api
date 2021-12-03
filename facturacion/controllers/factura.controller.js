@@ -94,7 +94,6 @@ const getFactura = async (req, res ) => {
             },
              
           })
-          .populate('metodo_pago')
   .then(factura => {
       if(!factura) {
           return res.status(404).send({

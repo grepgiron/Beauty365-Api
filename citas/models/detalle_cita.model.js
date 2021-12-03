@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const DetalleCitaSchema = new mongoose.Schema({
   cita: {
-    type: monogoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'cita',
     required: true
   },

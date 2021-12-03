@@ -19,6 +19,8 @@ var MetodoPago = require('./facturacion/controllers/metodo_pago.controller');
 var Sar = require('./config/controllers/sar.controller');
 var Service = require('./inventario/controllers/servicio.controller');
 
+var Citas = require('./citas/controllers/citas.controller');
+
 
 const router = express.Router();
 
@@ -63,6 +65,12 @@ router
   .get('/productos/:_id', Producto.getProducto)
   .put('/productos/:_id', Producto.update)
   .post('/productos/create', Producto.createProducto);
+
+router
+  .get('/citas', Citas.getCitas)
+  .get('/citas/:_id', Citas.getCita)
+  .post('/citas/create', Citas.createCita)
+  .put('/citas/:_id', Citas.updateCita);
 
   router
   .get('/documentos_autorizados', DocumentoAutorizado.index)

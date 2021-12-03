@@ -23,7 +23,7 @@ const createCita = async (req, res) => {
   const result = await newCita.save().then(result => {
       const { _id } = result;
       const detalle = new DetalleCita({
-        cita_id: _id
+        cita: _id
       })
         detalle.save();
         res.json({

@@ -16,6 +16,16 @@ const createComercial = async (req, res) => {
   res.json(result)
 }
 
+const get = async (req, res) => {
+    const result = await Comercial.find();
+    res.json(result)
+}
+
+const update = async (req, res) => {
+    const result = await Comercial.findOneAndUpdate({_id: req.params.id}, req.body, {new: true});
+    res.json(result)
+}
+
 const getComercial = async (req, res ) => {
     Comercial.findById(req.params._id)
   .then(comercial => {
@@ -39,5 +49,7 @@ const getComercial = async (req, res ) => {
 
 module.exports = {
     getComercial,
-    createComercial
+    createComercial,
+    get,
+    update
 }

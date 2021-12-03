@@ -1,6 +1,7 @@
 var  express = require("express");
 
 var PersonalController = require('./administracion/controllers/personal.controller');
+var Comercial = require('./administracion/controllers/comercial.controller');
 
 var Categoria = require('./inventario/controllers/categoria.controller');
 var Unidades = require('./inventario/controllers/unidades.controller');
@@ -33,6 +34,12 @@ router
   .put('/empleados/:_id', PersonalController.updateEmpleado)
   .delete('/empleados/:_id', PersonalController.deleteEmpleado)
   .post('/empleados/create', PersonalController.createEmpleado);
+
+router
+  .get('/comerciales', Comercial.get)
+  .post('/comerciales', Comercial.createComercial)
+  .put('/comerciales/:_id', Comercial.update)
+  .get('/comerciales/:_id', Comercial.getComercial);
 
   router
   .get('/categorias', Categoria.index)

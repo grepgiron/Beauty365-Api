@@ -32,6 +32,10 @@ const SarSchema = new mongoose.Schema({
       type: Number,
       trim: true
     },
+    formato: {
+        type: String,
+        trim: true
+    },
     is_active: {
       type: Boolean,
       default: true
@@ -43,18 +47,27 @@ const SarSchema = new mongoose.Schema({
 });
 
 SarSchema.pre('save', function (next) {
-    mongoose.model('sar').find().sort({$natural:-1}).limit(1).exec(function(err, sar){
-        if(err) return next(err);
-        if(sar.length > 0){
-        mongoose.model('sar').findByIdAndUpdate(sar[0]._id, 
-            {$set: {is_active: false}}, {new: true}, function(err, sar){
-                if(err){
-                    console.log(err);
-                }
-            });
-        }
+  mongoose.model('sar').find().sort({$natural:-1}).limit(1).exec(function(err, sar){
+    if(err) return next(err);
+    if(sar.length > 0){
+    this.formato = mongoose.model('establecimiento').findById(sar[0].establecimiento).then(establecimiento => {
+      return establecimiento.prefijo;
     });
-    next();
+    this.formato = this.formato +'-'+ mongoose.model('pos').findById(sar[0].pos).then(pos => {
+      return pos.prefijo;
+    });
+    this.formato = this.formato +'-'+ mongoose.model('documento_fiscal').findById(sar[0].documento_fiscal).then(documento_fiscal => {
+      return documento_fiscal.prefijo;
+    });
+    mongoose.model('sar').findByIdAndUpdate(sar[0]._id, 
+      {$set: {is_active: false}}, {new: true}, function(err, sar){
+        if(err){
+          console.log(err);
+        }
+      });
+    }
+  });
+  next();
 });
                 
 

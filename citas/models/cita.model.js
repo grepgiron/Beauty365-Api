@@ -18,7 +18,6 @@ const CitaSchema = new mongoose.Schema({
   },
   hora: {
     type: String,
-    required: true
   },
   comentario: {
     type: String

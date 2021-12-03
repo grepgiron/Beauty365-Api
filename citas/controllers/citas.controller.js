@@ -23,6 +23,21 @@ const createCita = async (req, res) => {
   res.json(result)
 }
 
+const updateCita = async (req, res) => {
+    const { id } = req.params;
+    const cita = {
+        nombre: req.body.nombre,
+        telefono: req.body.telefono,
+        dni : req.body.dni,
+        fecha : req.body.fecha,
+        hora : req.body.hora,
+        comentario : req.body.comentario,
+    }
+    const result = await Cita.findByIdAndUpdate(id, cita, {new: true});
+    res.json(result)
+}
+
+
 const getCita = async (req, res ) => {
     Cita.findById(req.params._id)
   .then(cita => {
@@ -47,5 +62,6 @@ const getCita = async (req, res ) => {
 module.exports = {
     getCita,
     getCitas,
-    createCita
+    createCita,
+    updateCita
 }

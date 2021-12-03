@@ -6,7 +6,7 @@ var Rango = require('../../config/models/rango.model');
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
 const getFacturas = async (req, res) => {
-  const facturas =  await Factura.find()
+  const facturas =  await Factura.find().populate('cliente')
     res.json(facturas)
 }
 

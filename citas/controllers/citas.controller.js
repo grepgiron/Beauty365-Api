@@ -13,6 +13,7 @@ const createCita = async (req, res) => {
   const newCita = new Cita({
     nombre: req.body.nombre,
     telefono: req.body.telefono,
+    email: req.body.email,
     dni : req.body.dni,
     fecha : req.body.fecha,
     hora : req.body.hora,

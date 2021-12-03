@@ -12,7 +12,7 @@ const DetalleCitaSchema = new mongoose.Schema({
     required: true
   },
   empleado: {
-    type: monogoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'empleado'
   },
   hora_entrada: {

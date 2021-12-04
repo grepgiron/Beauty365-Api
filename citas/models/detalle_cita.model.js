@@ -28,7 +28,8 @@ const DetalleCitaSchema = new mongoose.Schema({
     type: String
   },
   completado: { 
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   comentario_admin: { 
     type: String

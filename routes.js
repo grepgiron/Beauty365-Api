@@ -20,6 +20,7 @@ var Sar = require('./config/controllers/sar.controller');
 var Service = require('./inventario/controllers/servicio.controller');
 
 var Citas = require('./citas/controllers/citas.controller');
+var CitasDetalle = require('./citas/controllers/detalle_cita.controller');
 
 
 const router = express.Router();
@@ -71,6 +72,10 @@ router
   .get('/citas/:_id', Citas.getCita)
   .post('/citas/create', Citas.createCita)
   .put('/citas/:_id', Citas.updateCita);
+
+router
+  .get('/citas/detalle/:_id', CitasDetalle.get)
+  .put('/citas/detalle/:_id', CitasDetalle.update)
 
   router
   .get('/documentos_autorizados', DocumentoAutorizado.index)

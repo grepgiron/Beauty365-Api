@@ -1,8 +1,8 @@
-var DetalleCita = require('./models/detalle_cita.js');
+var DetalleCita = require('./../models/detalle_cita.model');
 
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
-const updateCita = async (req, res) => {
+const update = async (req, res) => {
     const { id } = req.params;
     const cita = {
         activa: req.body.activa,
@@ -13,13 +13,12 @@ const updateCita = async (req, res) => {
         comentario : req.body.comentario,
         completado: req.body.completado
     }
-    const result = await DetalleCita.findByIdAndUpdate(id, cita, {new: true});
+    const result = await DetalleCita.findOneAndUpdate({ cita: id }, cita, {new: true});
     res.json(result)
 }
 
-
-const getCita = async (req, res ) => {
-    DetalleCita.findById(req.params._id)
+const get = async (req, res ) => {
+    DetalleCita.find({ cita: req.params._id})
   .then(cita => {
       if(!cita) {
           return res.status(404).send({
@@ -41,7 +40,5 @@ const getCita = async (req, res ) => {
 
 module.exports = {
     get,
-    index,
-    create,
     update
 }

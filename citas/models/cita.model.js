@@ -12,6 +12,9 @@ const CitaSchema = new mongoose.Schema({
   dni: {
     type: Number
   },
+  email: {
+    type: String
+  },
   fecha: {
     type: Date,
     required: true

@@ -3,18 +3,20 @@ var DetalleCita = require('./../models/detalle_cita.model');
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
 const update = async (req, res) => {
-    const { id } = req.params;
-    const cita = {
-        activa: req.body.activa,
-        empleado: req.body.empleado,
-        hora_entrada : req.body.hora_entrada,
-        hora_salida : req.body.hora_salida,
-        servicio : req.body.servicio,
-        comentario : req.body.comentario,
-        completado: req.body.completado
-    }
-    const result = await DetalleCita.findOneAndUpdate({ cita: id }, cita, {new: true});
-    res.json(result)
+    if(req.params.body){
+        return res.status(404).send({
+          message: "Detalle not found with id " + req.params.body
+        });
+      }
+      const cliente = await DetalleCita.findByIdAndUpdate(req.params._id, 
+        req.params.body, {
+        new: true
+      });
+    
+      if (!cliente) {
+        return res.status(404).send('That platform ID was not found');
+      }
+      res.send(cliente);
 }
 
 const get = async (req, res ) => {

@@ -68,7 +68,7 @@ const ventasHoy = async (req, res) => {
       ventas.impuesto = impuesto.toFixed(2);
       res.json(ventas)
     } else {
-      res.json("No hay ventas hoy")
+      res.json(ventas)
     }
   })
 }
@@ -103,7 +103,7 @@ const ventasMes = async (req, res) => {
       ventas.impuesto = impuesto.toFixed(2);
       res.json(ventas)
     } else {
-      res.json("No hay ventas en este mes")
+      res.json(ventas)
     }
   })
 }

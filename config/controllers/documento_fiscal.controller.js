@@ -19,14 +19,18 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const { id } = req.params;
-  const result = await DocumentoFiscal.findByIdAndUpdate(id, req.body, { new: true });
-  if (!result) {
+  if(req.params.body){
     return res.status(404).send({
-      message: "documentoFiscal not found with id " + req.params._id
+      message: "User not found with id " + req.params.body
     });
   }
-  res.json(result)
+  const document = await DocumentoFiscal.findByIdAndUpdate(req.params._id, 
+    req.body, { new: true });
+
+  if (!document) {
+    return res.status(404).send('That platform ID was not found');
+  }
+  res.send(document);
 }
 
 const get = async (req, res ) => {

@@ -19,16 +19,18 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    const result = await PuntoDeVenta.findByIdAndUpdate(req.params._id, {
-        nombre: req.body.nombre,
-        prefijo: req.body.prefijo
-    }, {new: true})
-    if(!result) {
+    if(req.params.body){
         return res.status(404).send({
-            message: "puntoDeVenta not found with id " + req.params._id
+            message: "User not found with id " + req.params.body
         });
+        }
+    const puntoDeVenta = await PuntoDeVenta.findByIdAndUpdate(req.params._id, 
+        req.body, { new: true });
+
+    if (!puntoDeVenta) {
+        return res.status(404).send('That platform ID was not found');
     }
-    res.json(result)
+    res.send(puntoDeVenta);
 }
 
 const get = async (req, res ) => {

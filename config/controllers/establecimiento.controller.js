@@ -19,14 +19,18 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const { id } = req.params;
-  const result = await Establecimiento.findByIdAndUpdate(id, req.body, { new: true });
-  if (!result) {
+  if(req.params.body){
     return res.status(404).send({
-      message: "establecimiento not found with id " + req.params._id
+      message: "User not found with id " + req.params.body
     });
   }
-  res.json(result)
+  const establecimiento = await Establecimiento.findByIdAndUpdate(req.params._id, 
+    req.body, { new: true });
+
+  if (!establecimiento) {
+    return res.status(404).send('That platform ID was not found');
+  }
+  res.send(establecimiento);
 }
 
 const get = async (req, res ) => {

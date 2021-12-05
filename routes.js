@@ -71,7 +71,8 @@ router
   .get('/citas', Citas.getCitas)
   .get('/citas/:_id', Citas.getCita)
   .post('/citas/create', Citas.createCita)
-  .put('/citas/:_id', Citas.updateCita);
+  .put('/citas/:_id', Citas.updateCita)
+  .get('/citas_hoy', Citas.getCitasToday);
 
 router
   .get('/citas/detalle/:_id', CitasDetalle.get)
@@ -107,8 +108,9 @@ router
 router
   .get('/facturas', Factura.getFacturas)
   .get('/facturas/:_id', Factura.getFactura)
-  .post('/facturas/create', Factura.createFactura);
-
+  .post('/facturas/create', Factura.createFactura)
+  .get('/ventas_hoy', Factura.ventasHoy)
+  .get('/ventas_mes', Factura.ventasMes);
 router
   .get('/metodos_pago', MetodoPago.getMetodosDePago)
   .get('/metodos_pago/:_id', MetodoPago.getMetodoDePago)

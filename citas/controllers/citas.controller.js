@@ -10,6 +10,16 @@ const getCitas = async (req, res) => {
     res.json(citas)
 }
 
+const getCitasToday = async (req, res) => {
+    console.log(new Date());
+    const citas =  await Cita.find({
+        fecha: {$gte: new Date()},
+        fecha: {$lte: new Date()}
+    }).sort({fecha: 1} )
+    res.json(citas)
+}
+
+
 const createCita = async (req, res) => {
   const newCita = new Cita({
     nombre: req.body.nombre,
@@ -73,5 +83,6 @@ module.exports = {
     getCita,
     getCitas,
     createCita,
-    updateCita
+    updateCita,
+    getCitasToday
 }

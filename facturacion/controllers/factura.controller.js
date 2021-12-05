@@ -38,7 +38,75 @@ const createFactura = async (req, res) => {
   })
 }
 
+const ventasHoy = async (req, res) => {
+  const ventas = {
+    facturas: [],
+    total: 0,
+    impuesto: 0
+  }
+  var hoy = new Date();
+  var dd = hoy.getDate();
+  var mm = hoy.getMonth()+1; //hoy es 0!
+  var yyyy = hoy.getFullYear();
+  if(dd<10) {
+      dd='0'+dd
+  } 
+  if(mm<10) {
+      mm='0'+mm
+  } 
+  hoy = yyyy+'-'+mm+'-'+dd;
+  Factura.find({ fecha: hoy }).populate('cliente').then(facturas => {
+    if(facturas.length > 0) {
+      var total = 0;
+      var impuesto = 0;
+      for (var i = 0; i < facturas.length; i++) {
+        impuesto += facturas[i].impuesto;
+        total += facturas[i].total;
+      }
+      ventas.facturas = facturas;
+      ventas.total = total;
+      ventas.impuesto = impuesto.toFixed(2);
+      res.json(ventas)
+    } else {
+      res.json("No hay ventas hoy")
+    }
+  })
+}
 
+const ventasMes = async (req, res) => {
+  const ventas = {
+    facturas: [],
+    total: 0,
+    impuesto: 0
+  }
+  var hoy = new Date();
+  var dd = hoy.getDate();
+  var mm = hoy.getMonth()+1; //hoy es 0!
+  var yyyy = hoy.getFullYear();
+  if(dd<10) {
+      dd='0'+dd
+  }
+  if(mm<10) {
+      mm='0'+mm
+  }
+  hoy = yyyy+'-'+mm+'-'+dd;
+  Factura.find({ fecha: { $regex: '^'+yyyy+'-'+mm+'-' } }).populate('cliente').then(facturas => {
+    if(facturas.length > 0) {
+      var total = 0;
+      var impuesto = 0;
+      for (var i = 0; i < facturas.length; i++) {
+        impuesto += facturas[i].impuesto;
+        total += facturas[i].total;
+      }
+      ventas.facturas = facturas;
+      ventas.total = total;
+      ventas.impuesto = impuesto.toFixed(2);
+      res.json(ventas)
+    } else {
+      res.json("No hay ventas en este mes")
+    }
+  })
+}
 
   /* const newFactura = new Factura({
     //num_factura: req.body.num_factura,
@@ -116,5 +184,7 @@ const getFactura = async (req, res ) => {
 module.exports = {
     getFacturas,
     getFactura,
-    createFactura
+    createFactura,
+    ventasHoy,
+    ventasMes
 }

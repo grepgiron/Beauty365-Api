@@ -72,7 +72,7 @@ router
   .get('/citas/:_id', Citas.getCita)
   .post('/citas/create', Citas.createCita)
   .put('/citas/:_id', Citas.updateCita)
-  .get('/citas_hoy', Citas.getCitasToday);
+  .get('/citas_hoy', Citas.citasHoy);
 
 router
   .get('/citas/detalle/:_id', CitasDetalle.get)

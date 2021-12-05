@@ -10,15 +10,49 @@ const getCitas = async (req, res) => {
     res.json(citas)
 }
 
-const getCitasToday = async (req, res) => {
-    console.log(new Date());
-    const citas =  await Cita.find({
-        fecha: {$gte: new Date()},
-        fecha: {$lte: new Date()}
-    }).sort({fecha: 1} )
-    res.json(citas)
+const citasHoy = async (req, res ) => {
+    const citasArray = {
+        citas_hoy: 0,
+        messages: '',
+        citas: []
+    };
+    var hoy = new Date();
+    var dd = hoy.getDate();
+    var mm = hoy.getMonth()+1; //hoy es 0!
+    var yyyy = hoy.getFullYear();
+    if(dd<10) {
+        dd='0'+dd
+    }
+    if(mm<10) {
+        mm='0'+mm
+    }
+    hoy = yyyy+'-'+mm+'-'+dd;
+    Cita.find({fecha: hoy}).sort({fecha: 1})
+    .then(cita => {
+        if(!cita) {
+            return res.status(404).send({
+                message: "Cita not found with id " + req.params._id
+            });            
+        }
+        citasArray.citas_hoy = cita.length;
+        if(cita.length == 0) {
+            citasArray.messages = 'No hay citas para hoy'
+        }else{
+            citasArray.messages = 'Citas para hoy'
+        }
+        citasArray.citas = cita;
+        res.send(citasArray);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Cita not found with id " + req.params._id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving cita with id " + req.params._id
+        });
+    });
 }
-
 
 const createCita = async (req, res) => {
   const newCita = new Cita({
@@ -84,5 +118,5 @@ module.exports = {
     getCitas,
     createCita,
     updateCita,
-    getCitasToday
+    citasHoy
 }

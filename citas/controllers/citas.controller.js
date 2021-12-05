@@ -11,47 +11,38 @@ const getCitas = async (req, res) => {
 }
 
 const citasHoy = async (req, res ) => {
-    const citasArray = {
-        citas_hoy: 0,
-        messages: '',
-        citas: []
-    };
-    var hoy = new Date();
-    var dd = hoy.getDate();
-    var mm = hoy.getMonth()+1; //hoy es 0!
-    var yyyy = hoy.getFullYear();
-    if(dd<10) {
-        dd='0'+dd
-    }
-    if(mm<10) {
-        mm='0'+mm
-    }
-    hoy = yyyy+'-'+mm+'-'+dd;
-    Cita.find({fecha: hoy}).sort({fecha: 1})
-    .then(cita => {
-        if(!cita) {
-            return res.status(404).send({
-                message: "Cita not found with id " + req.params._id
-            });            
+    const ventas = {
+        citas: [],
+        message: '',
+        total_citas: 0
+      }
+      var hoy = new Date();
+      var dd = hoy.getDate();
+      var mm = hoy.getMonth()+1; //hoy es 0!
+      var yyyy = hoy.getFullYear();
+      if(dd<10) {
+          dd='0'+dd
+      } 
+      if(mm<10) {
+          mm='0'+mm
+      } 
+      hoy = yyyy+'-'+mm+'-'+dd;
+      Cita.find({ fecha: { $regex: '^'+yyyy+'-'+mm+'-'+dd } }).populate('cliente').then(citas => {
+        if(citas.length > 0) {
+          var total = 0;
+          var impuesto = 0;
+          for (var i = 0; i < citas.length; i++) {
+            impuesto += citas[i].impuesto;
+            total_citas += citas[i].total;
+          }
+          ventas.citas = citas;
+          ventas.total_citas = total;
+          ventas.message = 'Citas de hoy';
+          res.json(ventas)
+        } else {
+          res.json(ventas)
         }
-        citasArray.citas_hoy = cita.length;
-        if(cita.length == 0) {
-            citasArray.messages = 'No hay citas para hoy'
-        }else{
-            citasArray.messages = 'Citas para hoy'
-        }
-        citasArray.citas = cita;
-        res.send(citasArray);
-    }).catch(err => {
-        if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Cita not found with id " + req.params._id
-            });                
-        }
-        return res.status(500).send({
-            message: "Error retrieving cita with id " + req.params._id
-        });
-    });
+      })
 }
 
 const createCita = async (req, res) => {

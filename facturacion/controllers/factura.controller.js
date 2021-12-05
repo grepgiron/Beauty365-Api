@@ -55,7 +55,7 @@ const ventasHoy = async (req, res) => {
       mm='0'+mm
   } 
   hoy = yyyy+'-'+mm+'-'+dd;
-  Factura.find({ fecha: hoy }).populate('cliente').then(facturas => {
+  Factura.find({ fecha: { $regex: '^'+yyyy+'-'+mm+'-'+dd } }).populate('cliente').then(facturas => {
     if(facturas.length > 0) {
       var total = 0;
       var impuesto = 0;
@@ -90,6 +90,7 @@ const ventasMes = async (req, res) => {
       mm='0'+mm
   }
   hoy = yyyy+'-'+mm+'-'+dd;
+  console.log(hoy);
   Factura.find({ fecha: { $regex: '^'+yyyy+'-'+mm+'-' } }).populate('cliente').then(facturas => {
     if(facturas.length > 0) {
       var total = 0;

@@ -27,16 +27,10 @@ const citasHoy = async (req, res ) => {
           mm='0'+mm
       } 
       hoy = yyyy+'-'+mm+'-'+dd;
-      Cita.find({ fecha: { $regex: '^'+yyyy+'-'+mm+'-'+dd } }).populate('cliente').then(citas => {
+      Cita.find({ fecha: { $regex: '^'+yyyy+'-'+mm+'-'+dd } }).then(citas => {
         if(citas.length > 0) {
-          var total = 0;
-          var impuesto = 0;
-          for (var i = 0; i < citas.length; i++) {
-            impuesto += citas[i].impuesto;
-            total_citas += citas[i].total;
-          }
           ventas.citas = citas;
-          ventas.total_citas = total;
+          ventas.total_citas = citas.length;
           ventas.message = 'Citas de hoy';
           res.json(ventas)
         } else {

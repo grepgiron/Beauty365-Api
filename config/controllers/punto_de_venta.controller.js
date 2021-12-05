@@ -18,6 +18,19 @@ const create = async (req, res) => {
   res.json(result)
 }
 
+const update = async (req, res) => {
+    const result = await PuntoDeVenta.findByIdAndUpdate(req.params._id, {
+        nombre: req.body.nombre,
+        prefijo: req.body.prefijo
+    }, {new: true})
+    if(!result) {
+        return res.status(404).send({
+            message: "puntoDeVenta not found with id " + req.params._id
+        });
+    }
+    res.json(result)
+}
+
 const get = async (req, res ) => {
   PuntoDeVenta.findById(req.params._id)
   .then(puntoDeVenta => {
@@ -42,5 +55,6 @@ const get = async (req, res ) => {
 module.exports = {
     get,
     create,
-    index
+    index,
+    update
 }

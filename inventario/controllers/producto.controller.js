@@ -6,7 +6,7 @@ var Stock = require('../models/stock.model');
 // Metodos GET, POST, DELETE, PULL de modelo Cliente
 
 const getProductos = async (req, res) => {
-  const productos =  await Producto.find()
+  const productos =  await Producto.find().populate({ path: 'unidad', select: 'nombre' }).populate({ path: 'categoria', select: 'nombre' });
     res.json(productos)
 }
 

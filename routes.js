@@ -93,16 +93,19 @@ router
 router
   .get('/documentos_fiscal', DocumentoFiscal.index)
   .get('/documentos_fiscal/:_id', DocumentoFiscal.get)
+  .put('/documentos_fiscal/:_id', DocumentoFiscal.update)
   .post('/documentos_fiscal/create', DocumentoFiscal.create);
 
 router
   .get('/establecimientos', Establecimiento.index)
   .get('/establecimientos/:_id', Establecimiento.get)
+  .put('/establecimientos/:_id', Establecimiento.update)
   .post('/establecimientos/create', Establecimiento.create);
 
 router
   .get('/puntos_de_venta', POS.index)
   .get('/puntos_de_venta/:_id', POS.get)
+  .put('/puntos_de_venta/:_id', POS.update)
   .post('/puntos_de_venta/create', POS.create);
 
 router
